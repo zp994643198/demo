@@ -10,59 +10,94 @@
     <h1 id="test1"></h1>
     <script>
         ////////////new test
-        function obj1(name,age){
-            this.name = name
-            this.age = age
-            return {
-                name:this.name,
-            }
-        }
+        // function obj1(name,age){
+        //     this.name = name
+        //     this.age = age
+        //     return {
+        //         name:this.name,
+        //     }
+        // }
         
-        var obj2 = createNew(obj1,'test2',22)
-        console.log('obj2',obj2)
+        // var obj2 = createNew(obj1,'test2',22)
     
-        var obj3 = new obj1('test3',33)
-        console.log('obj3',obj3)
+        // var obj3 = new obj1('test3',33)
 
         ////////////Promise test
 
-        // function timeOut(ms,rejms){
-        //     return new Promise((resolve,reject)=>{
-        //         // setTimeout(resolve,ms,'done')
+        // function timeOut2(ms){
+        //     return new myPromise((resolve,reject)=>{
         //         // setTimeout(()=>{
-        //         //     // console.log('ms number ',ms)
-        //         //     resolve(ms)
+        //         //     console.log('this is time out ',ms)
+        //         //     resolve('is resolve')
         //         // },ms)
-
-        //         setTimeout(()=>{
-        //             reject(rejms)
-        //         },rejms)
-        
+        //         resolve('is resolve')
         //     })
         // }
-        // timeOut(2000,3000).then(resolve=>{
-        //     console.log('this is resolve ',resolve)
-        // },reject=>{
-        //     console.log('this is reject ',reject)
-        // }).catch(err=>{
-        //     console.log('this is err ',err)
+        // timeOut2(2000).then(res=>{
         // })
-
-        function timeOut2(ms){
-            return new myPromise((resolve,reject)=>{
-                // setTimeout(()=>{
-                //     console.log('this is time out ',ms)
-                //     resolve('is resolve')
-                // },ms)
-                console.log('no settimeout')
-                resolve('is resolve')
-            })
+        
+        //////////call apply bind test
+        var test1 = 100,test2 = 300;
+        var Test={
+            test1 : 200,
+            test2 : this.test2,
+            getTest:function(arg1,arg2){
+                // console.log('arg1 ',arg1,' arg2 ',arg2 )
+                // console.log(this.test1)
+            }
         }
-        timeOut2(2000).then(res=>{
-            console.log('res ',res)
-        })
+        var test3 = {
+            test1: 1000,
+            getTest:function(arg1,arg2){
+                // console.log('test3 arg1 ',arg1,'test3 arg2 ',arg2 )
+                // console.log(this.test1)
+            }
+        }
+
+        // Test.getTest.call(test3,'11','22')
+        // Test.getTest.mycall(test3,'11','22')
+        // Test.getTest.apply(test3)
+        // Test.getTest.myapply(test3)
+        // Test.getTest.apply(test3,['11','22'])
+        // Test.getTest.myapply(test3,['11','22'])
+        Test.getTest.bind(test3,'111','222')()
+        Test.getTest.mybind(test3,'111','222')()
+
+        ///////////深浅拷贝
+        //shallow copy
+        var src = {
+            test1:'test1',
+            test2:'test2',
+            null:null
+        }
+        // var shallowCopy = src
+        // // shallowCopy.test3 = 'test3'
+        // console.log(src)
+        // console.log(shallowCopy)
+
+        // // var src2 = {
+        // //     test1:'test1_1',
+        // //     test2:'test2_1',
+        // // }
+
+        var shallowCopy2 = Object.assign({},src)
+        //Object.assign() 会把后面的参数合并到第一个参数中，当后面参数对象时，对于合并以后的对象，
+        shallowCopy2.test1 = 'test1_1'
+        shallowCopy2.testObj = 'obj1_1'
+        // shallowCopy2.testObj.obj1 = 'obj1_1'
+        // console.log(src)
+        // console.log(shallowCopy2)
         
-        
+        // //deep copy
+        var deepCopy1 = JSON.parse(JSON.stringify(src))
+        // deepCopy1.test3 = 'test3'
+        // console.log(src)
+        console.log(deepCopy1)
+        console.log('is equal ? ',deepCopy1 === src)
+        var deepCopy2 = deepClone(src);
+        console.log(deepCopy2)
+        console.log('is equal ? ',deepCopy2 === src)
+
     </script>
 </body>
 </html>
