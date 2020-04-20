@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1 id="test1"></h1>
+    <button onclick="debounce()"></button>
     <script>
         ////////////new test
         // function obj1(name,age){
@@ -61,7 +62,7 @@
         // Test.getTest.apply(test3,['11','22'])
         // Test.getTest.myapply(test3,['11','22'])
         Test.getTest.bind(test3,'111','222')()
-        Test.getTest.mybind(test3,'111','222')()
+        // Test.getTest.mybind(test3,'111','222')()
 
         ///////////深浅拷贝
         //shallow copy
@@ -89,14 +90,25 @@
         // console.log(shallowCopy2)
         
         // //deep copy
-        var deepCopy1 = JSON.parse(JSON.stringify(src))
-        // deepCopy1.test3 = 'test3'
-        // console.log(src)
-        console.log(deepCopy1)
-        console.log('is equal ? ',deepCopy1 === src)
-        var deepCopy2 = deepClone(src);
-        console.log(deepCopy2)
-        console.log('is equal ? ',deepCopy2 === src)
+        // var deepCopy1 = JSON.parse(JSON.stringify(src))
+        // // deepCopy1.test3 = 'test3'
+        // // console.log(src)
+        // console.log(deepCopy1)
+        // console.log('is equal ? ',deepCopy1 === src)
+        // var deepCopy2 = deepClone(src);
+        // console.log(deepCopy2)
+        // console.log('is equal ? ',deepCopy2 === src)
+
+        //节流
+        var count = 0;
+        function testFn(){
+            // count=count+1
+            // console.log('this is count ',count);
+            console.log('one')
+        }
+        //防抖
+        debounce(testFn,500)
+        
 
     </script>
 </body>

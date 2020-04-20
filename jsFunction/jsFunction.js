@@ -142,3 +142,25 @@ function deepClone(obj){
     }
     return copy
 }
+//限流
+function throttle(fn,delay){
+    let prev = Date.now()
+    return function(){
+        // let context = this;
+        // let arg = arguments;
+        let now = Date.now()
+        if(now - prev >= delay){
+            // fn.apply(context,arg)
+            fn();
+            prev = now;
+        }
+    }
+}
+//防抖
+function debounce(callback,delay=300){
+    var t = null;
+    return function(){
+        clearTimeout(t)
+        t = setTimeout(callback,delay)
+    }
+}
